@@ -20,9 +20,9 @@ import com.desafio.solidesapi.repositories.UsuarioRepository;
 @AllArgsConstructor
 public class FiltroToken extends OncePerRequestFilter {
 
-	private TokenService tokenService;
+	private final TokenService tokenService;
 
-	private UsuarioRepository usuarioRepository;
+	private final UsuarioRepository usuarioRepository;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

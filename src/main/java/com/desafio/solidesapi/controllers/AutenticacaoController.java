@@ -3,13 +3,10 @@ package com.desafio.solidesapi.controllers;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.desafio.solidesapi.config.security.service.TokenService;
-import com.desafio.solidesapi.model.dto.LoginDTO;
+import com.desafio.solidesapi.model.record.UsuarioRecord;
 import com.desafio.solidesapi.model.entities.Usuario;
 
 import lombok.AllArgsConstructor;
@@ -19,15 +16,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AutenticacaoController {
 
-	private AuthenticationManager authenticationManager;
+	private final AuthenticationManager authenticationManager;
 
-	private TokenService tokenService;
+	private final TokenService tokenService;
 
 	@PostMapping
-	public String login(@RequestBody LoginDTO loginDTO) {
+	public String logar(@RequestBody UsuarioRecord loginRecord) {
 
 		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-				loginDTO.login(), loginDTO.senha());
+				loginRecord.login(), loginRecord.senha());
 
 		Authentication auth = this.authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 		
@@ -36,5 +33,13 @@ public class AutenticacaoController {
 		return tokenService.gerarToken(usuario);
 
 	}
+
+	@GetMapping
+	public String aa() {
+
+		 return "a";
+
+	}
+
 
 }

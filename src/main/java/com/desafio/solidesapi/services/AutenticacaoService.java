@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class AutenticacaoService implements UserDetailsService {
 
-	private UsuarioRepository usuarioRepository;
+	private final UsuarioRepository usuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

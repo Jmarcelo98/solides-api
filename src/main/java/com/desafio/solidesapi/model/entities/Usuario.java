@@ -1,14 +1,17 @@
 package com.desafio.solidesapi.model.entities;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,6 +37,16 @@ public class Usuario implements UserDetails {
 
 	@NotNull
 	private String senha;
+
+	@OneToMany(mappedBy = "usuario", orphanRemoval = true)
+	@JsonIgnore
+	private List<Post> posts;
+
+	@OneToMany(mappedBy = "usuario", orphanRemoval = true)
+	@JsonIgnore
+	private List<Album> albuns;
+
+	//	metodos do userDetails
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

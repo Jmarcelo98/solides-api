@@ -10,4 +10,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 	Optional<Usuario> findByLoginIgnoreCase(String login);
 
+	Boolean existsByLoginIgnoreCase(String login);
+
 }

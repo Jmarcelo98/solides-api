@@ -1,5 +1,6 @@
 package com.desafio.solidesapi.config.exceptions;
 
+import com.desafio.solidesapi.handlers.BusinessException;
 import com.desafio.solidesapi.handlers.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +29,20 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         body.setDescription(ex.getMessage());
         return handleExceptionInternal(ex, body, headers, status, request);
 
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request) {
+
+        var headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        var status = HttpStatus.BAD_REQUEST;
+
+        var body = new ResponseError();
+        body.setCode(status.value());
+        body.setDescription(ex.getMessage());
+        return handleExceptionInternal(ex, body, headers, status, request);
     }
 
 }
