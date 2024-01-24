@@ -1,12 +1,10 @@
 package com.desafio.solidesapi.model.dto;
 
-import com.desafio.solidesapi.model.entities.Foto;
-import com.desafio.solidesapi.model.entities.Usuario;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor

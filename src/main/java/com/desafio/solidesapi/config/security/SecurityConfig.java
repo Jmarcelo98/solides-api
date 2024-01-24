@@ -1,6 +1,5 @@
 package com.desafio.solidesapi.config.security;
 
-import org.apache.catalina.filters.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -9,45 +8,39 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import lombok.AllArgsConstructor;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import java.util.Collections;
+import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
+//@EnableWebMvc
 @AllArgsConstructor
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
-public class SecurityConfig {
+public class SecurityConfig implements WebMvcConfigurer {
 
 	private final FiltroToken filter;
 
 	private final String[] ACESSO = { "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-			"/configuration/security", "/swagger-ui.html", "/swagger-ui.html**", "/webjars/**", "/h2/**", "/h2-console/**" };
+			"/configuration/security", "/swagger-ui.html", "/swagger-ui.html**", "/webjars/**", "/h2/**",
+			"/h2-console/**" };
+
+	private final String[] ACESSO_POST = { "/login", "/usuario" };
+	private final String[] ACESSO_GET = { "/post", "/album/todos" };
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity.csrf(csrf -> csrf.disable()).headers(head -> head.frameOptions().sameOrigin())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(authorize ->authorize
-						.antMatchers(HttpMethod.POST, "/post").permitAll()
-						.antMatchers(HttpMethod.GET, "/post").permitAll()
-						.antMatchers(HttpMethod.POST, "/usuario").permitAll()
-//						.antMatchers(HttpMethod.POST, "/cadastrar").permitAll()
-						.antMatchers(HttpMethod.GET, "/album/todos").permitAll()
-						.antMatchers(ACESSO).permitAll()
+				.authorizeHttpRequests(authorize -> authorize.antMatchers(HttpMethod.POST, ACESSO_POST).permitAll()
+						.antMatchers(HttpMethod.GET, ACESSO_GET).permitAll().antMatchers(ACESSO).permitAll()
 						.anyRequest().authenticated())
-				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
+				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();	
 
 	}
 
@@ -58,7 +51,7 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	public PasswordEncoder passwordEncoder(){
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
@@ -79,6 +72,7 @@ public class SecurityConfig {
 //		config.addAllowedMethod("DELETE");
 //		config.addAllowedMethod("PATCH");
 //		source.registerCorsConfiguration("/**", config);
-//		return new CorsFilter();
+//		return new CorsFilter(source);
 //	}
+
 }

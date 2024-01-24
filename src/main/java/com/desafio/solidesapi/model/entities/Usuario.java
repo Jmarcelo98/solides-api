@@ -11,14 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -26,6 +27,7 @@ import lombok.Data;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario implements UserDetails {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +48,7 @@ public class Usuario implements UserDetails {
 	@JsonIgnore
 	private List<Album> albuns;
 
-	//	metodos do userDetails
+	// metodos do userDetails
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
