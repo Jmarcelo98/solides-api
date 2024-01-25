@@ -11,14 +11,12 @@ import com.desafio.solidesapi.model.entities.Usuario;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
-//	LIKE CONCAT('%',:username,'%')
-    @Query(value = "SELECT p FROM Post p  "
-            + "WHERE (:texto IS NULL OR UPPER(p.texto) LIKE CONCAT ('%',:texto,'%') ) "
-//            + "WHERE (:texto IS NULL OR UPPER(p.texto) = :texto ) "
-            + "AND (:link IS NULL OR UPPER(p.link) = :link ) "
-            + "AND (:id IS NULL OR p.id = :id ) ")
-    Page<Post> consultarPorFiltro(@Param(value = "texto") String texto, @Param(value = "link") String link, @Param(value = "id") Integer id, Pageable pageable);
+	@Query(value = "SELECT p FROM Post p  " + "WHERE (:texto IS NULL OR UPPER(p.texto) LIKE CONCAT ('%',:texto,'%') ) "
+			+ "AND (:link IS NULL OR UPPER(p.link) LIKE CONCAT ('%',:link,'%') ) "
+			+ "AND (:id IS NULL OR p.id = :id ) ")
+	Page<Post> consultarPorFiltro(@Param(value = "texto") String texto, @Param(value = "link") String link,
+			@Param(value = "id") Integer id, Pageable pageable);
 
-    Boolean existsByIdAndUsuario(Integer id, Usuario usuario);
+	Boolean existsByIdAndUsuario(Integer id, Usuario usuario);
 
 }
