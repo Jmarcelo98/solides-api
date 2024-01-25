@@ -45,7 +45,7 @@ public class PostService {
 
 	public void deletar(Integer idPost, Usuario usuarioLogado) {
 
-		if (verificarSeUsuarioLogadoPodeDeletarPost(idPost, usuarioLogado)) {
+		if (!verificarSeUsuarioLogadoPodeDeletarPost(idPost, usuarioLogado)) {
 			throw new BusinessException("Você só pode excluir seus próprios posts");
 		}
 

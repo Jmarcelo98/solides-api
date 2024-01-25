@@ -51,7 +51,7 @@ public class StartDbServiceDev {
 		var post3Usuario1 = Post.builder().id(null).texto("Sólides Tangerino").imagem(null).usuario(usuario1)
 				.link("https://tangerino.com.br/").dataCriacao(LocalDate.now()).build();
 
-		var post1Usuario2 = Post.builder().id(null).texto("O Brasil").imagem(null).usuario(usuario2)
+		var post4Usuario1 = Post.builder().id(null).texto("O Brasil").imagem(null).usuario(usuario1)
 				.link("https://brasilescola.uol.com.br/geografia/pais-brasil.htm").dataCriacao(LocalDate.now()).build();
 
 		var post2Usuario2 = Post.builder().id(null).texto("Java 17").imagem(null)
@@ -61,14 +61,14 @@ public class StartDbServiceDev {
 		var post2Usuario3 = Post.builder().id(null).texto("Angular Material v.15").imagem(null).usuario(usuario2)
 				.link("https://v15.material.angular.io/").dataCriacao(LocalDate.now()).build();
 
-		postRepository.saveAll(Arrays.asList(post1Usuario1, post1Usuario2, post3Usuario1, post2Usuario1, post2Usuario2,
+		postRepository.saveAll(Arrays.asList(post1Usuario1, post4Usuario1, post3Usuario1, post2Usuario1, post2Usuario2,
 				post2Usuario3));
 
 		var comentario1Usuario1NoPost2 = Comentario.builder().id(null).comentario("O país mais bonito!")
-				.post(post1Usuario2).usuario(usuario1).dataCriacao(LocalDate.now()).build();
+				.post(post4Usuario1).usuario(usuario2).dataCriacao(LocalDate.now()).build();
 
 		var comentario1Usuario2NoPost2 = Comentario.builder().id(null).dataCriacao(LocalDate.now())
-				.comentario("Eu concordo").post(post1Usuario2).usuario(usuario2).build();
+				.comentario("Eu concordo").post(post4Usuario1).usuario(usuario1).build();
 
 		var comentario1Usuario2NoPost3 = Comentario.builder().id(null).dataCriacao(LocalDate.now())
 				.comentario("Ajuda muito! Juntamente com o Bootstrap").post(post2Usuario3).usuario(usuario1).build();
