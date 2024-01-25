@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/usuarios")
 @AllArgsConstructor
 @CrossOrigin
-public class UsuarioController {	
+public class UsuarioController {
 
 	private final UsuarioService usuarioService;
 

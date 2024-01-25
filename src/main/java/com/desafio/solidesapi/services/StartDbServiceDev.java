@@ -1,5 +1,6 @@
 package com.desafio.solidesapi.services;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import com.desafio.solidesapi.model.entities.Album;
@@ -32,22 +33,35 @@ public class StartDbServiceDev {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-		var usuario1 = Usuario.builder().id(null).login("joao").senha(encoder.encode("123")).build();
-		var usuario2 = Usuario.builder().id(null).login("tauany").senha(encoder.encode("123")).build();
+		var usuario1 = Usuario.builder().id(null).login("joao").senha(encoder.encode("1234")).build();
+		var usuario2 = Usuario.builder().id(null).login("tauany").senha(encoder.encode("1234")).build();
 
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
 
-		var post1Usuario1 = Post.builder().id(null).texto("Texto de teste 1, primeiro texto do usuario 1").imagem(null).link("https://www.google.com/").usuario(usuario1).build();
-		var post2Usuario1 = Post.builder().id(null).texto("Estamos testando novamente, segundo do usuario 1").imagem(null).link("https://www.lipsum.com/").usuario(usuario1).build();
-		var post3Usuario1 = Post.builder().id(null).texto("Ultimo teste do usuario 1").imagem(null).usuario(usuario1).link(null).build();
-		var post1Usuario2 = Post.builder().id(null).texto("Aqui é um teste 1 do usuario 2").imagem(null).usuario(usuario2).link("https://www.psafe.com/dfndr-lab/pt-br/").build();
-		var post2Usuario2 = Post.builder().id(null).texto("Esse é o ultimo teste do usuario 2").imagem(null).link("").usuario(usuario2).link("https://www.devmedia.com.br/testlink-gerenciando-atividades-de-teste/32281").build();
+		var post1Usuario1 = Post.builder().id(null).texto("Texto de teste 1, primeiro texto do usuario 1").imagem(null)
+				.link("https://www.google.com/").usuario(usuario1).dataCriacao(LocalDate.now()).build();
+		var post2Usuario1 = Post.builder().id(null).texto("Estamos testando novamente, segundo do usuario 1")
+				.imagem(null).link("https://www.lipsum.com/").usuario(usuario1).dataCriacao(LocalDate.now()).build();
+		var post3Usuario1 = Post.builder().id(null).texto("Ultimo teste do usuario 1").imagem(null).usuario(usuario1)
+				.link(null).dataCriacao(LocalDate.now()).build();
+		var post1Usuario2 = Post.builder().id(null).texto("Aqui é um teste 1 do usuario 2").imagem(null)
+				.usuario(usuario2).link("https://www.psafe.com/dfndr-lab/pt-br/").dataCriacao(LocalDate.now()).build();
+		var post2Usuario2 = Post.builder().id(null).texto("Teste criado para paginação").imagem(null)
+				.link("www.paginacao.com.br").usuario(usuario2)
+				.link("https://www.devmedia.com.br/testlink-gerenciando-atividades-de-teste/32281")
+				.dataCriacao(LocalDate.now()).build();
+		var post2Usuario3 = Post.builder().id(null).texto("Esse é o ultimo teste do usuario 2").imagem(null).link("")
+				.usuario(usuario2).link("https://www.devmedia.com.br/testlink-gerenciando-atividades-de-teste/32281")
+				.dataCriacao(LocalDate.now()).build();
 
-		postRepository.saveAll(Arrays.asList(post1Usuario1, post1Usuario2, post3Usuario1, post2Usuario1, post2Usuario2));
+		postRepository.saveAll(Arrays.asList(post1Usuario1, post1Usuario2, post3Usuario1, post2Usuario1, post2Usuario2,
+				post2Usuario3));
 
 		var album1Usuario1 = Album.builder().id(null).titulo("A vida é bela! A1-1").usuario(usuario1).build();
-		var album2Usuario1 = Album.builder().id(null).titulo("A importância do consumo de água A2-1").usuario(usuario1).build();
-		var album1Usuario2 = Album.builder().id(null).titulo("A grande final da Copa SP Futebol Jr A1-2").usuario(usuario2).build();
+		var album2Usuario1 = Album.builder().id(null).titulo("A importância do consumo de água A2-1").usuario(usuario1)
+				.build();
+		var album1Usuario2 = Album.builder().id(null).titulo("A grande final da Copa SP Futebol Jr A1-2")
+				.usuario(usuario2).build();
 
 		albumRepository.saveAll(Arrays.asList(album1Usuario1, album2Usuario1, album1Usuario2));
 

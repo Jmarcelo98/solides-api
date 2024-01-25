@@ -1,6 +1,6 @@
 package com.desafio.solidesapi.model.entities;
 
-
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,13 +32,16 @@ public class Post {
 	private String texto;
 
 	private String link;
+	
+	@NotNull
+	private LocalDate dataCriacao;
 
 	@Lob
 //	@NotNull - descomentar ao criar front-end
 	private byte[] imagem;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_user", nullable = false)
+	@JoinColumn(name = "id_user")
 	private Usuario usuario;
 
 }

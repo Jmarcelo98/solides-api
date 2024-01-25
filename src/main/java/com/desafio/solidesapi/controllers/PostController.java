@@ -1,9 +1,8 @@
 package com.desafio.solidesapi.controllers;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.solidesapi.config.security.AppContextHolder;
 import com.desafio.solidesapi.model.dto.PostDTO;
-import com.desafio.solidesapi.model.record.input.PostInputRecord;
+import com.desafio.solidesapi.model.record.PostFiltroRecord;
 import com.desafio.solidesapi.services.PostService;
 
 import lombok.AllArgsConstructor;
@@ -31,9 +30,9 @@ public class PostController {
 		postService.criar(postDTO, appContextHolder.getUsuario());
 	}
 
-	@GetMapping
-	public List<PostDTO> consultarPorFiltro(PostInputRecord postInputRecord) {
-		return postService.consultarPorFiltro(postInputRecord);
+	@PostMapping("/filtro")
+	public Page<PostDTO> consultarPorFiltro(@RequestBody PostFiltroRecord postFiltroRecord, Pageable pageable) {
+		return postService.consultarPorFiltro(postFiltroRecord, pageable);
 	}
 
 	@DeleteMapping("/{id}")

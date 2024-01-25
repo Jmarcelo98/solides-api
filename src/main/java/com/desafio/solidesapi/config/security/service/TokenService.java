@@ -15,7 +15,7 @@ public class TokenService {
 	public String gerarToken(Usuario usuario) {
 
 		return JWT.create().withSubject(usuario.getLogin()).withClaim("id", usuario.getId())
-				.withExpiresAt(LocalDateTime.now().plusMinutes(24).toInstant(ZoneOffset.of("-03:00")))
+				.withExpiresAt(LocalDateTime.now().plusMinutes(730).toInstant(ZoneOffset.of("-03:00")))
 				.sign(Algorithm.HMAC256("secreta"));
 	}
 

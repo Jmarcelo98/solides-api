@@ -19,7 +19,7 @@
 		<java.version>17</java.version>
 		<h2.version>2.2.224</h2.version>
 		<swagger.version>2.9.2</swagger.version>
-		<mapstruct.version>1.4.2.Final</mapstruct.version>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 
 	<dependencies>
