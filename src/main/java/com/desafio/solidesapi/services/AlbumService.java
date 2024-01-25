@@ -1,7 +1,7 @@
 package com.desafio.solidesapi.services;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.desafio.solidesapi.handlers.BusinessException;
@@ -21,9 +21,8 @@ public class AlbumService {
 
 	private final FotoService fotoService;
 
-	public List<AlbumDTO> buscarTodos() {
-		var todos = albumRepository.findAll();
-		return AlbumMapper.INSTANCE.listaEntityToListaDTO(todos);
+	public Page<AlbumDTO> buscarTodos(Pageable pageable) {
+		return AlbumMapper.INSTANCE.pageEntityToPageDTO(albumRepository.findAll(pageable));
 	}
 
 	public void criar(AlbumDTO albumDTO, Usuario usuarioLogado) {

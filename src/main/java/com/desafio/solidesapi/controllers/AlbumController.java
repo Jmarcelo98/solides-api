@@ -1,7 +1,7 @@
 package com.desafio.solidesapi.controllers;
 
-import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,8 +26,8 @@ public class AlbumController {
 	private final AppContextHolder appContextHolder;
 
 	@GetMapping("/todos")
-	public List<AlbumDTO> consultarTodos() {
-		return albumService.buscarTodos();
+	public Page<AlbumDTO> consultarTodos(Pageable pageable) {
+		return albumService.buscarTodos(pageable);
 	}
 
 	@PostMapping

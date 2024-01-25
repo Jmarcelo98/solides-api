@@ -38,7 +38,8 @@ public class SecurityConfig implements WebMvcConfigurer {
 		return httpSecurity.csrf(csrf -> csrf.disable()).headers(head -> head.frameOptions().sameOrigin())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize.antMatchers(HttpMethod.POST, ACESSO_POST).permitAll()
-						.antMatchers(HttpMethod.GET, ACESSO_GET).permitAll().antMatchers(ACESSO).permitAll()
+						.antMatchers(HttpMethod.GET, ACESSO_GET).permitAll()
+						.antMatchers(ACESSO).permitAll()
 						.anyRequest().authenticated())
 				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
 
