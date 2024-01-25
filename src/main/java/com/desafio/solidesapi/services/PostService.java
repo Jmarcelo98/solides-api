@@ -30,8 +30,8 @@ public class PostService {
 	public Page<PostDTO> consultarPorFiltro(PostFiltroRecord postFiltroRecord, Pageable pageable) {
 
 		var lista = postRepository.consultarPorFiltro(
-				postFiltroRecord.texto() != null ? postFiltroRecord.texto() : null,
-				postFiltroRecord.link() != null ? postFiltroRecord.link() : null,
+				postFiltroRecord.texto() != null ? postFiltroRecord.texto().toUpperCase() : null,
+				postFiltroRecord.link() != null ? postFiltroRecord.link().toUpperCase()  : null,
 				postFiltroRecord.id() != null ? postFiltroRecord.id() : null, pageable);
 
 		return PostMapper.INSTANCE.pageEntityToPageDTO(lista);

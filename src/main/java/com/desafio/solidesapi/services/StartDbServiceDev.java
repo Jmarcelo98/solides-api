@@ -38,7 +38,7 @@ public class StartDbServiceDev {
 
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
 
-		var post1Usuario1 = Post.builder().id(null).texto("Texto de teste 1, primeiro texto do usuario 1").imagem(null)
+		var post1Usuario1 = Post.builder().id(null).texto("Texto de teste 1, primeiro texto do usuario 1, W maiusculo para teste filtro").imagem(null)
 				.link("https://www.google.com/").usuario(usuario1).dataCriacao(LocalDate.now()).build();
 		var post2Usuario1 = Post.builder().id(null).texto("Estamos testando novamente, segundo do usuario 1")
 				.imagem(null).link("https://www.lipsum.com/").usuario(usuario1).dataCriacao(LocalDate.now()).build();
