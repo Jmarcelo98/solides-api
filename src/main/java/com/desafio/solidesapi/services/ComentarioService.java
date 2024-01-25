@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
+import com.desafio.solidesapi.handlers.BusinessException;
 import com.desafio.solidesapi.mappers.PostMapper;
 import com.desafio.solidesapi.model.entities.Comentario;
 import com.desafio.solidesapi.model.entities.Usuario;
@@ -28,6 +29,20 @@ public class ComentarioService {
 
 		comentarioRepository.save(comentario);
 
+	}
+
+	public void deletar(Integer id, Usuario usuarioLogado) {
+		if (!verificarSeUsuarioLogadoPodeDeletarComentario(id, usuarioLogado)) {
+			throw new BusinessException("Você só pode excluir seus próprios comentários");
+		}
+
+		comentarioRepository.deleteById(id);
+	}
+
+//	privado
+
+	private Boolean verificarSeUsuarioLogadoPodeDeletarComentario(Integer id, Usuario usuarioLogado) {
+		return comentarioRepository.existsByIdAndUsuario(id, usuarioLogado);
 	}
 
 }
