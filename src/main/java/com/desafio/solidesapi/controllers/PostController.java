@@ -3,6 +3,7 @@ package com.desafio.solidesapi.controllers;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,11 @@ public class PostController {
 	@PostMapping("/filtro")
 	public Page<PostDTO> consultarPorFiltro(@RequestBody PostFiltroRecord postFiltroRecord, Pageable pageable) {
 		return postService.consultarPorFiltro(postFiltroRecord, pageable);
+	}
+
+	@GetMapping(path = "/{id}")
+	public PostDTO consultarPorId(@PathVariable("id") Integer id) {
+		return postService.consultarPorId(id);
 	}
 
 	@DeleteMapping("/{id}")

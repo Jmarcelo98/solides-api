@@ -25,7 +25,7 @@ public class Album {
 	private String titulo;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_user", nullable = false, updatable = false)
+	@JoinColumn(name = "id_usuario", nullable = false, updatable = false)
 	private Usuario usuario;
 
 	@OneToMany(mappedBy = "album", orphanRemoval = true)

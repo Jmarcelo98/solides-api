@@ -34,12 +34,19 @@ public class Usuario implements UserDetails {
 	private String senha;
 
 	@OneToMany(mappedBy = "usuario", orphanRemoval = true)
+	@JsonIgnore
 	private List<Post> posts;
 
 	@OneToMany(mappedBy = "usuario", orphanRemoval = true)
 	@JsonIgnore
 	private List<Album> albuns;
 
+	@OneToMany(mappedBy = "usuario", orphanRemoval = true)
+	@JsonIgnore
+	private List<Comentario> comentarios;
+
+	
+	
 	// metodos do userDetails
 
 	@Override

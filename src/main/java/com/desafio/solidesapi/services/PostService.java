@@ -1,12 +1,11 @@
 package com.desafio.solidesapi.services;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.desafio.solidesapi.handlers.BusinessException;
+import com.desafio.solidesapi.handlers.ResourceNotFoundException;
 import com.desafio.solidesapi.mappers.PostMapper;
 import com.desafio.solidesapi.model.dto.PostDTO;
 import com.desafio.solidesapi.model.entities.Post;
@@ -27,18 +26,19 @@ public class PostService {
 				.usuario(usuarioLogado).build());
 	}
 
+	public PostDTO consultarPorId(Integer id) {
+		return PostMapper.INSTANCE.entityToDTO(postRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Post não encontrado pelo ID: " + id)));
+	}
+
 	public Page<PostDTO> consultarPorFiltro(PostFiltroRecord postFiltroRecord, Pageable pageable) {
 
 		var lista = postRepository.consultarPorFiltro(
 				postFiltroRecord.texto() != null ? postFiltroRecord.texto().toUpperCase() : null,
-				postFiltroRecord.link() != null ? postFiltroRecord.link().toUpperCase()  : null,
+				postFiltroRecord.link() != null ? postFiltroRecord.link().toUpperCase() : null,
 				postFiltroRecord.id() != null ? postFiltroRecord.id() : null, pageable);
 
 		return PostMapper.INSTANCE.pageEntityToPageDTO(lista);
-	}
-
-	public List<PostDTO> all() {
-		return PostMapper.INSTANCE.listaEntityToListaDTO(postRepository.findAll());
 	}
 
 	public void deletar(Integer idPost, Usuario usuarioLogado) {

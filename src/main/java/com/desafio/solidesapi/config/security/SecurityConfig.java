@@ -31,7 +31,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 			"/h2-console/**" };
 
 	private final String[] ACESSO_POST = { "/login", "/usuarios" };
-	private final String[] ACESSO_GET = { "/posts", "/albuns/todos" };
+	private final String[] ACESSO_GET = { "/albuns/todos" };
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {

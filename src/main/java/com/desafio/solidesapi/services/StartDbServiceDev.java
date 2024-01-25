@@ -4,9 +4,11 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 import com.desafio.solidesapi.model.entities.Album;
+import com.desafio.solidesapi.model.entities.Comentario;
 import com.desafio.solidesapi.model.entities.Foto;
 import com.desafio.solidesapi.model.entities.Post;
 import com.desafio.solidesapi.repositories.AlbumRepository;
+import com.desafio.solidesapi.repositories.ComentarioRepository;
 import com.desafio.solidesapi.repositories.FotoRepository;
 import com.desafio.solidesapi.repositories.PostRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,6 +31,8 @@ public class StartDbServiceDev {
 
 	private final FotoRepository fotoRepository;
 
+	private final ComentarioRepository comentarioRepository;
+
 	public void instanciarDados() {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -38,7 +42,8 @@ public class StartDbServiceDev {
 
 		usuarioRepository.saveAll(Arrays.asList(usuario1, usuario2));
 
-		var post1Usuario1 = Post.builder().id(null).texto("Texto de teste 1, primeiro texto do usuario 1, W maiusculo para teste filtro").imagem(null)
+		var post1Usuario1 = Post.builder().id(null)
+				.texto("Texto de teste 1, primeiro texto do usuario 1, W maiusculo para teste filtro").imagem(null)
 				.link("https://www.google.com/").usuario(usuario1).dataCriacao(LocalDate.now()).build();
 		var post2Usuario1 = Post.builder().id(null).texto("Estamos testando novamente, segundo do usuario 1")
 				.imagem(null).link("https://www.lipsum.com/").usuario(usuario1).dataCriacao(LocalDate.now()).build();
@@ -56,6 +61,13 @@ public class StartDbServiceDev {
 
 		postRepository.saveAll(Arrays.asList(post1Usuario1, post1Usuario2, post3Usuario1, post2Usuario1, post2Usuario2,
 				post2Usuario3));
+
+		var comentario1Usuario1NoPost2 = Comentario.builder().id(null).comentario("Excelente teste").post(post1Usuario2)
+				.usuario(usuario1).dataCriacao(LocalDate.now()).build();
+		var comentario1Usuario2NoPost1 = Comentario.builder().id(null).dataCriacao(LocalDate.now()).comentario("Excelente teste").post(post1Usuario1)
+				.usuario(usuario2).build();
+
+		comentarioRepository.saveAll(Arrays.asList(comentario1Usuario1NoPost2, comentario1Usuario2NoPost1));
 
 		var album1Usuario1 = Album.builder().id(null).titulo("A vida é bela! A1-1").usuario(usuario1).build();
 		var album2Usuario1 = Album.builder().id(null).titulo("A importância do consumo de água A2-1").usuario(usuario1)
