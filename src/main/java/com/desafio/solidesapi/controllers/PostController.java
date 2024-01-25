@@ -18,7 +18,7 @@ import com.desafio.solidesapi.services.PostService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/posts")
 @AllArgsConstructor
 public class PostController {
 

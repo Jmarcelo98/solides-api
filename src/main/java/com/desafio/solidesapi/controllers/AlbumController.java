@@ -18,7 +18,7 @@ import com.desafio.solidesapi.services.AlbumService;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/album")
+@RequestMapping("/albuns")
 @AllArgsConstructor
 @CrossOrigin
 public class AlbumController {

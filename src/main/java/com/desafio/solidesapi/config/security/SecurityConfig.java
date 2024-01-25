@@ -30,8 +30,8 @@ public class SecurityConfig implements WebMvcConfigurer {
 			"/configuration/security", "/swagger-ui.html", "/swagger-ui.html**", "/webjars/**", "/h2/**",
 			"/h2-console/**" };
 
-	private final String[] ACESSO_POST = { "/login", "/usuario" };
-	private final String[] ACESSO_GET = { "/post", "/album/todos" };
+	private final String[] ACESSO_POST = { "/login", "/usuarios" };
+	private final String[] ACESSO_GET = { "/posts", "/albuns/todos" };
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {

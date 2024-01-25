@@ -35,7 +35,7 @@ public class UsuarioService {
 		var usuario = Usuario.builder().id(null).login(usuarioRecord.login())
 				.senha(bCrypt.encode(usuarioRecord.senha())).build();
 		usuarioRepository.save(usuario);
-		return UsuarioMapper.INSTANCE.entityToDTO(usuario);
+		return UsuarioMapper.INSTANCE.entityToDTO(usuario);	
 	}
 
 	// privados

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 @AllArgsConstructor
 @CrossOrigin
-public class UsuarioController {
+public class UsuarioController {	
 
 	private final UsuarioService usuarioService;
 
