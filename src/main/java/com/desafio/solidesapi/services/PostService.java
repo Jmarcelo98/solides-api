@@ -1,5 +1,7 @@
 package com.desafio.solidesapi.services;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,9 @@ public class PostService {
 
 	private final PostRepository postRepository;
 
-	public void criar(PostDTO postDTO, Usuario usuarioLogado) {
-		postRepository.save(Post.builder().id(null).texto(postDTO.getTexto()).imagem(postDTO.getImagem())
-				.usuario(usuarioLogado).build());
+	public Integer criar(PostDTO postDTO, Usuario usuarioLogado) {
+		return postRepository.save(Post.builder().id(null).texto(postDTO.getTexto()).imagem(postDTO.getImagem())
+				.dataCriacao(LocalDate.now()).usuario(usuarioLogado).build()).getId();
 	}
 
 	public PostDTO consultarPorId(Integer id) {

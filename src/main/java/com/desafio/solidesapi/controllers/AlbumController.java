@@ -2,7 +2,6 @@ package com.desafio.solidesapi.controllers;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +19,6 @@ import lombok.AllArgsConstructor;
 @RestController
 @RequestMapping("/albuns")
 @AllArgsConstructor
-@CrossOrigin
 public class AlbumController {
 
 	private final AlbumService albumService;

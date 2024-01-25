@@ -27,8 +27,8 @@ public class PostController {
 	private final AppContextHolder appContextHolder;
 
 	@PostMapping
-	public void criar(@RequestBody PostDTO postDTO) {
-		postService.criar(postDTO, appContextHolder.getUsuario());
+	public Integer criar(@RequestBody PostDTO postDTO) {
+		return postService.criar(postDTO, appContextHolder.getUsuario());
 	}
 
 	@PostMapping("/filtro")
