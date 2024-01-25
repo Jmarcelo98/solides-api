@@ -25,10 +25,12 @@ public class AlbumService {
 		return AlbumMapper.INSTANCE.pageEntityToPageDTO(albumRepository.findAll(pageable));
 	}
 
-	public void criar(AlbumDTO albumDTO, Usuario usuarioLogado) {
+	public Integer criar(AlbumDTO albumDTO, Usuario usuarioLogado) {
 		var album = albumRepository
 				.save(Album.builder().id(null).titulo(albumDTO.getTitulo()).usuario(usuarioLogado).build());
 		fotoService.criar(albumDTO.getFotos(), album);
+
+		return album.getId();	
 	}
 
 	public void deletar(Integer idAlbum, Usuario usuarioLogado) {

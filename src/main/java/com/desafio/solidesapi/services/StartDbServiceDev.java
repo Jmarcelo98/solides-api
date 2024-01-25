@@ -3,18 +3,16 @@ package com.desafio.solidesapi.services;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import com.desafio.solidesapi.model.entities.Album;
-import com.desafio.solidesapi.model.entities.Comentario;
-import com.desafio.solidesapi.model.entities.Foto;
-import com.desafio.solidesapi.model.entities.Post;
-import com.desafio.solidesapi.repositories.AlbumRepository;
-import com.desafio.solidesapi.repositories.ComentarioRepository;
-import com.desafio.solidesapi.repositories.FotoRepository;
-import com.desafio.solidesapi.repositories.PostRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.desafio.solidesapi.model.entities.Album;
+import com.desafio.solidesapi.model.entities.Comentario;
+import com.desafio.solidesapi.model.entities.Post;
 import com.desafio.solidesapi.model.entities.Usuario;
+import com.desafio.solidesapi.repositories.AlbumRepository;
+import com.desafio.solidesapi.repositories.ComentarioRepository;
+import com.desafio.solidesapi.repositories.PostRepository;
 import com.desafio.solidesapi.repositories.UsuarioRepository;
 
 import lombok.AllArgsConstructor;
@@ -28,8 +26,6 @@ public class StartDbServiceDev {
 	private final PostRepository postRepository;
 
 	private final AlbumRepository albumRepository;
-
-	private final FotoRepository fotoRepository;
 
 	private final ComentarioRepository comentarioRepository;
 
@@ -83,12 +79,6 @@ public class StartDbServiceDev {
 				.build();
 
 		albumRepository.saveAll(Arrays.asList(album1Usuario1, album2Usuario1, album1Usuario2));
-
-		var foto1Album1Usuario1 = Foto.builder().id(null).imagem(null).album(album1Usuario1).build();
-		var foto2Album1Usuario1 = Foto.builder().id(null).imagem(null).album(album1Usuario1).build();
-		var foto1Album2Usuario2 = Foto.builder().id(null).imagem(null).album(album1Usuario2).build();
-
-		fotoRepository.saveAll(Arrays.asList(foto1Album1Usuario1, foto2Album1Usuario1, foto1Album2Usuario2));
 
 	}
 

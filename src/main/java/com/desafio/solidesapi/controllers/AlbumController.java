@@ -31,8 +31,8 @@ public class AlbumController {
 	}
 
 	@PostMapping
-	public void criar(@RequestBody AlbumDTO albumDTO) {
-		albumService.criar(albumDTO, appContextHolder.getUsuario());
+	public Integer criar(@RequestBody AlbumDTO albumDTO) {
+		return albumService.criar(albumDTO, appContextHolder.getUsuario());
 	}
 
 	@DeleteMapping("/{id}")
