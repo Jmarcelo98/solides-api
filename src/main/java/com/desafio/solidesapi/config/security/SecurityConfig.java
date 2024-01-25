@@ -40,7 +40,7 @@ public class SecurityConfig implements WebMvcConfigurer {
 				.authorizeHttpRequests(authorize -> authorize.antMatchers(HttpMethod.POST, ACESSO_POST).permitAll()
 						.antMatchers(HttpMethod.GET, ACESSO_GET).permitAll().antMatchers(ACESSO).permitAll()
 						.anyRequest().authenticated())
-				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();	
+				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class).build();
 
 	}
 
@@ -54,25 +54,5 @@ public class SecurityConfig implements WebMvcConfigurer {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
-//	@Bean
-//	public CorsFilter corsFilter() {
-//		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		final CorsConfiguration config = new CorsConfiguration();
-//		config.addAllowedOrigin(CorsConfiguration.ALL);
-//		config.addAllowedHeader("*");
-//		config.addAllowedOriginPattern("*");
-//		config.setAllowedOrigins(Collections.singletonList("*"));
-//		config.addExposedHeader("Authorization");
-//		config.addAllowedMethod("OPTIONS");
-//		config.addAllowedMethod("HEAD");
-//		config.addAllowedMethod("GET");
-//		config.addAllowedMethod("PUT");
-//		config.addAllowedMethod("POST");
-//		config.addAllowedMethod("DELETE");
-//		config.addAllowedMethod("PATCH");
-//		source.registerCorsConfiguration("/**", config);
-//		return new CorsFilter(source);
-//	}
 
 }
