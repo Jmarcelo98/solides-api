@@ -41,7 +41,7 @@ public class AlbumService {
 
 	public void deletar(Integer idAlbum, Usuario usuarioLogado) {
 
-		if (verificarSeUsuarioLogadoPodeDeletarAlbum(idAlbum, usuarioLogado)) {
+		if (!verificarSeUsuarioLogadoPodeDeletarAlbum(idAlbum, usuarioLogado)) {
 			throw new BusinessException("Você só pode excluir seus próprios albuns");
 		}
 

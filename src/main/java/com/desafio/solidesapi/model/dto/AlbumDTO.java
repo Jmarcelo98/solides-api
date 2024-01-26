@@ -17,6 +17,6 @@ public class AlbumDTO {
 
 	private List<FotoDTO> fotos;
 
-//	private Usuario usuario;
+	private UsuarioDTO usuario;
 
 }
