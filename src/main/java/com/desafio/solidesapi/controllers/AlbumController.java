@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafio.solidesapi.config.security.AppContextHolder;
 import com.desafio.solidesapi.model.dto.AlbumDTO;
+import com.desafio.solidesapi.model.record.AlbumFiltroRecord;
 import com.desafio.solidesapi.services.AlbumService;
 
 import lombok.AllArgsConstructor;
@@ -25,9 +26,9 @@ public class AlbumController {
 
 	private final AppContextHolder appContextHolder;
 
-	@GetMapping("/todos")
-	public Page<AlbumDTO> consultarTodos(Pageable pageable) {
-		return albumService.buscarTodos(pageable);
+	@PostMapping("/todos")
+	public Page<AlbumDTO> consultarTodos(@RequestBody AlbumFiltroRecord albumFiltroRecord, Pageable pageable) {
+		return albumService.consultarPorFiltro(albumFiltroRecord, pageable, appContextHolder.getUsuario());
 	}
 
 	@PostMapping

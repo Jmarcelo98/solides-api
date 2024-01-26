@@ -10,6 +10,7 @@ import com.desafio.solidesapi.mappers.AlbumMapper;
 import com.desafio.solidesapi.model.dto.AlbumDTO;
 import com.desafio.solidesapi.model.entities.Album;
 import com.desafio.solidesapi.model.entities.Usuario;
+import com.desafio.solidesapi.model.record.AlbumFiltroRecord;
 import com.desafio.solidesapi.repositories.AlbumRepository;
 
 import lombok.AllArgsConstructor;
@@ -22,8 +23,20 @@ public class AlbumService {
 
 	private final FotoService fotoService;
 
-	public Page<AlbumDTO> buscarTodos(Pageable pageable) {
-		return AlbumMapper.INSTANCE.pageEntityToPageDTO(albumRepository.findAll(pageable));
+//	public Page<AlbumDTO> buscarTodos(AlbumFiltroRecord albumFiltroRecord, Pageable pageable) {
+//		return AlbumMapper.INSTANCE.pageEntityToPageDTO(albumRepository.findAll(pageable));
+//	}
+
+	public Page<AlbumDTO> consultarPorFiltro(AlbumFiltroRecord albumFiltroRecord, Pageable pageable,
+			Usuario usuarioLogado) {
+
+		var apenasMeusAlbuns = apenasMeusAlbuns(albumFiltroRecord.meusAlbuns());
+
+		var lista = albumRepository.consultarPorFiltro(
+				albumFiltroRecord.titulo() != null ? albumFiltroRecord.titulo().toUpperCase() : null,
+				apenasMeusAlbuns != false ? usuarioLogado : null, pageable);
+
+		return AlbumMapper.INSTANCE.pageEntityToPageDTO(lista);
 	}
 
 	public AlbumDTO consultarPorId(Integer id) {
@@ -53,6 +66,13 @@ public class AlbumService {
 
 	private Boolean verificarSeUsuarioLogadoPodeDeletarAlbum(Integer id, Usuario usuarioLogado) {
 		return albumRepository.existsByIdAndUsuario(id, usuarioLogado);
+	}
+
+	private Boolean apenasMeusAlbuns(Boolean valor) {
+		if (valor == null || valor == false) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -14,7 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 	@Query(value = "SELECT p FROM Post p  " + "WHERE (:texto IS NULL OR UPPER(p.texto) LIKE CONCAT ('%',:texto,'%') ) "
 			+ "AND (:link IS NULL OR UPPER(p.link) LIKE CONCAT ('%',:link,'%') ) "
 			+ "AND (:idPost IS NULL OR p.id = :idPost ) " 
-			+ "AND (:idUsuario IS NULL OR p.usuario = :idUsuario ) " )
+			+ "AND (:idUsuario IS NULL OR p.usuario = :idUsuario ) ")
 	Page<Post> consultarPorFiltro(@Param(value = "texto") String texto, @Param(value = "link") String link,
 			@Param(value = "idPost") Integer idPost, @Param(value = "idUsuario") Usuario idUsuario, Pageable pageable);
 
