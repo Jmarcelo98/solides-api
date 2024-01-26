@@ -36,7 +36,7 @@ public class PostController {
 		return postService.consultarPorFiltro(postFiltroRecord, pageable);
 	}
 
-	@GetMapping(path = "/{id}")
+	@GetMapping("/{id}")
 	public PostDTO consultarPorId(@PathVariable("id") Integer id) {
 		return postService.consultarPorId(id);
 	}

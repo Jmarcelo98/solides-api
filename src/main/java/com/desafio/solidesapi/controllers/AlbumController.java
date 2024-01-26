@@ -35,6 +35,11 @@ public class AlbumController {
 		return albumService.criar(albumDTO, appContextHolder.getUsuario());
 	}
 
+	@GetMapping("/{id}")
+	public AlbumDTO consultarPorId(@PathVariable("id") Integer id) {
+		return albumService.consultarPorId(id);
+	}
+
 	@DeleteMapping("/{id}")
 	public void deletar(@PathVariable("id") Integer id) {
 		albumService.deletar(id, appContextHolder.getUsuario());

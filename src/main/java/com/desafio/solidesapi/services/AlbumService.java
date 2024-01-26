@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.desafio.solidesapi.handlers.BusinessException;
+import com.desafio.solidesapi.handlers.ResourceNotFoundException;
 import com.desafio.solidesapi.mappers.AlbumMapper;
 import com.desafio.solidesapi.model.dto.AlbumDTO;
 import com.desafio.solidesapi.model.entities.Album;
@@ -25,12 +26,17 @@ public class AlbumService {
 		return AlbumMapper.INSTANCE.pageEntityToPageDTO(albumRepository.findAll(pageable));
 	}
 
+	public AlbumDTO consultarPorId(Integer id) {
+		return AlbumMapper.INSTANCE.entityToDTO(albumRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Post não encontrado pelo ID: " + id)));
+	}
+
 	public Integer criar(AlbumDTO albumDTO, Usuario usuarioLogado) {
 		var album = albumRepository
 				.save(Album.builder().id(null).titulo(albumDTO.getTitulo()).usuario(usuarioLogado).build());
 		fotoService.criar(albumDTO.getFotos(), album);
 
-		return album.getId();	
+		return album.getId();
 	}
 
 	public void deletar(Integer idAlbum, Usuario usuarioLogado) {
