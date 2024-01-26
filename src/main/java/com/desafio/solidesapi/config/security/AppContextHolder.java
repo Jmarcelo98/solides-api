@@ -18,6 +18,10 @@ public class AppContextHolder {
 
 	public Usuario getUsuario() {
 
+		if (SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+			return null;
+		}
+
 		Optional<Usuario> login = (Optional<Usuario>) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 

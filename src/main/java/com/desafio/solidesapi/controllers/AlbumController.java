@@ -26,8 +26,8 @@ public class AlbumController {
 
 	private final AppContextHolder appContextHolder;
 
-	@PostMapping("/todos")
-	public Page<AlbumDTO> consultarTodos(@RequestBody AlbumFiltroRecord albumFiltroRecord, Pageable pageable) {
+	@PostMapping("/filtro")
+	public Page<AlbumDTO> consultarTodos(@RequestBody AlbumFiltroRecord albumFiltroRecord, Pageable pageable) {	
 		return albumService.consultarPorFiltro(albumFiltroRecord, pageable, appContextHolder.getUsuario());
 	}
 
