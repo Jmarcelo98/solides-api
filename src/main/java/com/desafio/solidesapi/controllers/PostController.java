@@ -33,7 +33,7 @@ public class PostController {
 
 	@PostMapping("/filtro")
 	public Page<PostDTO> consultarPorFiltro(@RequestBody PostFiltroRecord postFiltroRecord, Pageable pageable) {
-		return postService.consultarPorFiltro(postFiltroRecord, pageable);
+		return postService.consultarPorFiltro(postFiltroRecord, pageable, appContextHolder.getUsuario());
 	}
 
 	@GetMapping("/{id}")

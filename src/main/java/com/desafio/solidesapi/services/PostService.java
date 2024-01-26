@@ -33,12 +33,16 @@ public class PostService {
 				.orElseThrow(() -> new ResourceNotFoundException("Post não encontrado pelo ID: " + id)));
 	}
 
-	public Page<PostDTO> consultarPorFiltro(PostFiltroRecord postFiltroRecord, Pageable pageable) {
+	public Page<PostDTO> consultarPorFiltro(PostFiltroRecord postFiltroRecord, Pageable pageable,
+			Usuario usuarioLogado) {
+
+		var apenasMeusPosts = apenasMeusPosts(postFiltroRecord.meusPost());
 
 		var lista = postRepository.consultarPorFiltro(
 				postFiltroRecord.texto() != null ? postFiltroRecord.texto().toUpperCase() : null,
 				postFiltroRecord.link() != null ? postFiltroRecord.link().toUpperCase() : null,
-				postFiltroRecord.id() != null ? postFiltroRecord.id() : null, pageable);
+				postFiltroRecord.id() != null ? postFiltroRecord.id() : null,
+				apenasMeusPosts != false ? usuarioLogado : null, pageable);
 
 		return PostMapper.INSTANCE.pageEntityToPageDTO(lista);
 	}
@@ -57,6 +61,13 @@ public class PostService {
 
 	private Boolean verificarSeUsuarioLogadoPodeDeletarPost(Integer id, Usuario usuarioLogado) {
 		return postRepository.existsByIdAndUsuario(id, usuarioLogado);
+	}
+
+	private Boolean apenasMeusPosts(Boolean valor) {
+		if (valor == null || valor == false) {
+			return false;
+		}
+		return true;
 	}
 
 }
